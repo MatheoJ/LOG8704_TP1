@@ -13,14 +13,16 @@ public class PlaceObject : MonoBehaviour
     [SerializeField]
     private GameObject ballToSpawn;
 
-    
+    [SerializeField]
+    private GameObject arrivalPrefab;
+        
     private ARRaycastManager raycastManager;
     private ARPlaneManager planeManager;
 
     private static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
-
     private GameObject spawnedBall;
+    private GameObject spawnedArrival;
 
     private void Awake()
     {
@@ -50,18 +52,24 @@ public class PlaceObject : MonoBehaviour
 
         var camera = Camera.main;
         var screenCenter = camera.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
-        if (raycastManager.Raycast(screenCenter, hits, TrackableType.PlaneWithinPolygon))
+        if (spawnedArrival == null)
         {
-
+            if (raycastManager.Raycast(screenCenter, hits, TrackableType.PlaneWithinPolygon))
+            {
+                var hitPose = hits[0].pose;
+                Vector3 addedPosition = new Vector3(0, 0.1f, 0);
+                spawnedArrival = Instantiate(arrivalPrefab, hitPose.position + addedPosition, hitPose.rotation);
+            }
+        }
+        else
+        { 
             if (spawnedBall != null)
             {
                 Destroy(spawnedBall);
             }
-
-            var hitPose = hits[0].pose;
-            spawnedBall = Instantiate(ballToSpawn, camera.transform.position, hitPose.rotation);
+            spawnedBall = Instantiate(ballToSpawn, camera.transform.position, camera.transform.rotation);
             var rigidbody = spawnedBall.GetComponent<Rigidbody>();
             rigidbody.linearVelocity = camera.transform.forward * 5.0f;
-        }
+        }      
     }
 }
