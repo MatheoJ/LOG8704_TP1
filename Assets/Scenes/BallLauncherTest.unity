@@ -138,7 +138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballToSpawn: {fileID: 6306418840398675862, guid: ebdb1fb6e3a26ef4691b7218f2a129e0,
     type: 3}
-  arrivalPrefab: {fileID: 0}
+  arrivalPrefab: {fileID: 6436623359186339547, guid: 15e35a406a0122e47a50d0f8806eb0b4,
+    type: 3}
 --- !u!1001 &331264285
 PrefabInstance:
   m_ObjectHideFlags: 0
