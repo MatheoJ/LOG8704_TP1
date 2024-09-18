@@ -55,7 +55,7 @@ public class PlaceObject : MonoBehaviour
         if (finger.index != 0 || isTouching)
             return;
 
-        touchStartTime = Time.time;  // Capture le temps au début du toucher
+        touchStartTime = Time.time;  // Capture le temps au dï¿½but du toucher
         isTouching = true;
     }
 
@@ -68,12 +68,14 @@ public class PlaceObject : MonoBehaviour
         touchDuration = Mathf.Clamp(touchDuration, 0f, 3f); // Clamp the duration between 0 and 3 seconds
         var camera = Camera.main;
 
+        var camera = Camera.main;
+
+        // Get touch position
+        var touchPosition = finger.screenPosition;
+
         if (spawnedArrival == null)
         {
-
-            var screenCenter = camera.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
-
-            if (raycastManager.Raycast(screenCenter, hits, TrackableType.PlaneWithinPolygon))
+            if (raycastManager.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon))
             {
                 var hitPose = hits[0].pose;
                 Vector3 addedPosition = new Vector3(0, 0.1f, 0);
