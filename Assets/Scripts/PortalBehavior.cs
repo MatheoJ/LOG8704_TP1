@@ -45,11 +45,15 @@ public class PortalBehavior : MonoBehaviour
         isTeleporting = true;
         exitPortal.isTeleporting = true;
 
+
         // Get the local position relative to EntryPortal
         Vector3 localPos = transform.InverseTransformPoint(other.transform.position);
 
         // Teleport object to the exit portal & set its position
         other.transform.position = exitPortal.spawnPosition.transform.position;
+
+        TrailRenderer trail = other.GetComponentInChildren<TrailRenderer>();
+        trail.Clear(); // Clear the trail to avoid a trail between the two portals
 
         // Apply an offset to the ball's position so it appears just in front of the exit portal
         other.transform.position += exitPortal.transform.forward * exitOffsetDistance;
@@ -67,6 +71,8 @@ public class PortalBehavior : MonoBehaviour
         Debug.Log("Object " + other.name + " teleported from " + name + " to " + exitPortal.name);
 
         yield return new WaitForSeconds(portalCooldown); // Small delay to prevent immediate re-teleportation (the other way around) --> temporarily stops the coroutine
+
+
 
         // Enabling the two portals teleporting ability
         isTeleporting = false; 

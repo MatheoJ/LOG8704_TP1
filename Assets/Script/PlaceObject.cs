@@ -68,6 +68,7 @@ public class PlaceObject : MonoBehaviour
         touchDuration = Mathf.Clamp(touchDuration, 0f, 3f); // Clamp the duration between 0 and 3 seconds
         var camera = Camera.main;
 
+
         // Get touch position
         var touchPosition = finger.screenPosition;
 
