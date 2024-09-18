@@ -4,11 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-<<<<<<< Updated upstream
   - Arrival
-=======
   - Teleportable
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
