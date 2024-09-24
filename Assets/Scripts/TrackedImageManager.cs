@@ -1,10 +1,14 @@
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
+using System.Collections.Generic;
 
 public class TrackedImageManager : MonoBehaviour
 {
     [SerializeField] private ARTrackedImageManager trackedImageManager;
     [SerializeField] private GameObject[] portalPrefabs;
+
+    // Dictionary to track spawned portals
+    private Dictionary<string, GameObject> activePortals = new Dictionary<string, GameObject>();
 
     private void OnEnable()
     {
@@ -29,46 +33,49 @@ public class TrackedImageManager : MonoBehaviour
         }
     }
 
+
     private void UpdatePortalForImage(ARTrackedImage trackedImage)
     {
-
         string imageName = trackedImage.referenceImage.name;
 
-        GameObject portalPrefab = null;
+        // Check if the portal is already spawned
+        if (!activePortals.ContainsKey(imageName))
+        {
+            GameObject portalPrefab = GetPortalPrefab(imageName);
 
-        // Instancier le bon portail selon l'image
+            if (portalPrefab != null)
+            {
+                // Adjust rotation to face the correct way
+                Quaternion adjustedRotation = trackedImage.transform.rotation * Quaternion.Euler(-90f, 0f, 0f); 
+
+                // Move the portal slightly forward
+                Vector3 forwardOffset = trackedImage.transform.up * 0.05f;
+
+                // Instantiate the portal with the adjusted position and rotation
+                GameObject spawnedPortal = Instantiate(portalPrefab, trackedImage.transform.position + forwardOffset, adjustedRotation);
+                spawnedPortal.transform.parent = trackedImage.transform;
+
+                // Track the spawned portal
+                activePortals.Add(imageName, spawnedPortal);
+                Debug.Log($"{imageName} detected!");
+            }
+        }
+    }
+
+    private GameObject GetPortalPrefab(string imageName)
+    {
         switch (imageName)
         {
             case "one":
-                portalPrefab = portalPrefabs[0];
-                Debug.Log("Image one detected!");
-                break;
+                return portalPrefabs[0];
             case "two":
-                portalPrefab = portalPrefabs[1];
-                Debug.Log("Image two detected!");
-                break;
+                return portalPrefabs[1];
             case "three":
-                portalPrefab = portalPrefabs[2];
-                Debug.Log("Image three detected!");
-                break;
+                return portalPrefabs[2];
             case "four":
-                portalPrefab = portalPrefabs[3];
-                Debug.Log("Image four detected!");
-                break;
-        }
-
-        if (portalPrefab != null)
-        {
-            // Adjust rotation to face the correct way
-            Quaternion adjustedRotation = trackedImage.transform.rotation * Quaternion.Euler(-90f, 0f, 0f); // Rotate 180 degrees to face the camera
-
-            // Move the portal slightly forward
-            Vector3 forwardOffset = trackedImage.transform.up * 0.05f;
-
-            // Instantiate the portal with the adjusted position and rotation
-            GameObject spawnedPortal = Instantiate(portalPrefab, trackedImage.transform.position + forwardOffset, adjustedRotation);
-
-            spawnedPortal.transform.parent = trackedImage.transform;
+                return portalPrefabs[3];
+            default:
+                return null;
         }
     }
 }
