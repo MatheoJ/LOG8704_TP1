@@ -1,7 +1,14 @@
 using UnityEngine;
 
+
 public class BallScript : MonoBehaviour
 {
+    [SerializeField]
+    private ParticleSystem impactFx;
+
+    [SerializeField]
+    private AudioSource impactSound;
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Arrival")
@@ -11,6 +18,16 @@ public class BallScript : MonoBehaviour
             collision.gameObject.GetComponent<ArrivalScript>().OnFinish();                  
 
             Destroy(gameObject);
+        }
+        else
+        {
+           //Instantiate the impactFx at the collision point and rotation
+           Instantiate(impactFx, collision.contacts[0].point, Quaternion.LookRotation(collision.contacts[0].normal));
+            //Apply scaling to the impactFx
+            impactFx.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
+            //Play the impact sound
+            impactSound.Play();
+
         }
     }
 }

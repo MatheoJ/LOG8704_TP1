@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/BallLauncherTest UI.unity
     guid: 44e849e4db5a6f04ab3c25cbc5ae16be
   - enabled: 1
-    path: Assets/Scenes/PortalARScene.unity
-    guid: 20619a2ff51f617419d47ee248276873
+    path: Assets/Scenes/BallLauncherTest.unity
+    guid: bfb1eba7c46704241856a370ee4fd6c1
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 6ee72d15cf39dd748a13eac57397b9af,
       type: 2}
