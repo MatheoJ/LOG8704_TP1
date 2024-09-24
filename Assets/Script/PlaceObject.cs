@@ -28,10 +28,13 @@ public class PlaceObject : MonoBehaviour
     private float touchStartTime;
     private bool isTouching = false;
 
+    private BarreProgression barreProgression;
+
     private void Awake()
     {
         raycastManager = FindObjectOfType<ARRaycastManager>();
         planeManager = FindObjectOfType<ARPlaneManager>();
+        barreProgression = FindObjectOfType<BarreProgression>();
     }
 
     private void OnEnable()
@@ -57,6 +60,7 @@ public class PlaceObject : MonoBehaviour
 
         touchStartTime = Time.time;  // Capture le temps au d�but du toucher
         isTouching = true;
+        barreProgression.SetValue(Mathf.Clamp(Time.time - touchStartTime,0f,3f)/3f);
     }
 
     private void OnFingerUp(EnhancedTouch.Finger finger)
@@ -93,7 +97,7 @@ public class PlaceObject : MonoBehaviour
 
             rigidbody.AddForce(camera.transform.forward * forceMultiplier, ForceMode.Impulse); // Apply force with adjusted strength
         }
-
+        barreProgression.SetValue(0f);
         isTouching = false; // Reset touching flag
     }
 

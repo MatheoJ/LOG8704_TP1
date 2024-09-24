@@ -18,7 +18,7 @@ public class PremierMenu : MonoBehaviour
             //transform.position.y = ;
             //transform.position.Set(transform.position.x, transform.position.y+5, transform.position.z);
             //((RectTransform)transform).localPosition.Set(transform.localPosition.x, transform.localPosition.y + 5, transform.localPosition.z);
-            Debug.Log("closing");
+            //Debug.Log("closing");
             ((RectTransform)transform).anchoredPosition = ((RectTransform)transform).anchoredPosition + new Vector2(0, 10);
         }
         if (((RectTransform)transform).anchoredPosition.y > 10000)
