@@ -283,7 +283,7 @@ PrefabInstance:
     - target: {fileID: 3673630500093023424, guid: 1da9f8b415a33d741843a063eac470cc,
         type: 3}
       propertyPath: throwInterval
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3767581001433555194, guid: 1da9f8b415a33d741843a063eac470cc,
         type: 3}

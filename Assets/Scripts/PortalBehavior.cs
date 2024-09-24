@@ -7,13 +7,11 @@ public class PortalBehavior : MonoBehaviour
     public GameObject spawnPosition; // position at which the object will spawn when teleporting
     private bool isTeleporting = false; // Prevent teleport loop
     public float portalCooldown = 0.5f; //
-    public float exitOffsetDistance = 0.0f; // Offset distance to ensure ball exits in front of portal, depends on the portal thickness
     
 
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if ExitPortal is assigned
         if (exitPortal == null)
         {
             Debug.LogError("ExitPortal is not set on " + gameObject.name);
@@ -26,15 +24,13 @@ public class PortalBehavior : MonoBehaviour
             return;
         }
 
-
-        // Check if the object is teleportable and isn't already teleporting
+        // Ensure that the object is teleportable and isn't already teleporting
         if (!isTeleporting && other.CompareTag("Teleportable"))
         {
             Rigidbody otherRb = other.GetComponent<Rigidbody>();
             if (otherRb != null)
-            {
-                // using coroutine to avoid the immediate re-triggering of teleportation
-                StartCoroutine(TeleportObject(other, otherRb)); 
+            { 
+                StartCoroutine(TeleportObject(other, otherRb)); // Using coroutine to avoid the immediate re-triggering of teleportation
             }
         }        
     }
@@ -44,29 +40,23 @@ public class PortalBehavior : MonoBehaviour
         // Disabling the two portals teleporting ability
         isTeleporting = true;
         exitPortal.isTeleporting = true;
+        
+        Debug.Log("BEFORE teleportation : Object " + other.name + " at position : " + other.transform.position);
 
-        // Get the local position relative to EntryPortal
-        Vector3 localPos = transform.InverseTransformPoint(other.transform.position);
+        // Position
+        Vector3 localPos = transform.InverseTransformPoint(other.transform.position); // Local position relative to the entry portal
+        other.transform.position = exitPortal.spawnPosition.transform.position; // Teleport object to the exit portal
 
-        // Teleport object to the exit portal & set its position
-        other.transform.position = exitPortal.spawnPosition.transform.position;
-
-        // Apply an offset to the ball's position so it appears just in front of the exit portal
-        other.transform.position += exitPortal.transform.forward * exitOffsetDistance;
-
-        // Calculate the velocity in the local space of the entry portal
-        Vector3 localVelocity = transform.InverseTransformDirection(otherRb.linearVelocity);
-
-        // Transform the velocity into the local space of the exit portal
-        // "-localVelocity" because the object exits the portal through its front, not its back
-        Vector3 newVelocity = exitPortal.transform.TransformDirection(-localVelocity); 
-
-        // Set the new velocity of the ball after teleportation
-        otherRb.linearVelocity = newVelocity;
+        // Velocity
+        Vector3 localVelocity = transform.InverseTransformDirection(otherRb.linearVelocity); // Get the object's velocity in the local space of the entry portal
+        Vector3 newVelocity = exitPortal.transform.TransformDirection(-localVelocity); // "-localVelocity" because the object exits the portal through its front, not its back
+        otherRb.linearVelocity = newVelocity; // Set the new velocity of the ball
 
         Debug.Log("Object " + other.name + " teleported from " + name + " to " + exitPortal.name);
+        Debug.Log("AFTER teleportation : Object " + other.name + " at position : " + other.transform.position);
+        Debug.Log("------------------");
 
-        yield return new WaitForSeconds(portalCooldown); // Small delay to prevent immediate re-teleportation (the other way around) --> temporarily stops the coroutine
+        yield return new WaitForSeconds(portalCooldown); // Small delay to prevent immediate re-teleportation (the other way around) -> temporarily stops the coroutine
 
         // Enabling the two portals teleporting ability
         isTeleporting = false; 
