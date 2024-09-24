@@ -58,6 +58,8 @@ public class PortalBehavior : MonoBehaviour
 
         Debug.Log("Object " + other.name + " teleported from " + name + " to " + exitPortal.name);
         Debug.Log("AFTER teleportation : Object " + other.name + " at position : " + other.transform.position);
+        Debug.Log("Entry portal postition : " + transform.position);
+        Debug.Log("Exit portal postition : " + exitPortal.transform.position);
         Debug.Log("------------------");
 
         yield return new WaitForSeconds(portalCooldown); // Small delay to prevent immediate re-teleportation (the other way around) -> temporarily stops the coroutine

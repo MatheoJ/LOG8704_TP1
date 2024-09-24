@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 169478518746444816}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.02}
+  m_LocalPosition: {x: 0, y: 0, z: 0.027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -169,7 +169,6 @@ MonoBehaviour:
     type: 3}
   spawnPosition: {fileID: 169478518746444816}
   portalCooldown: 0.5
-  exitOffsetDistance: 0
 --- !u!65 &6083639521587571887
 BoxCollider:
   m_ObjectHideFlags: 0
