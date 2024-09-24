@@ -69,7 +69,6 @@ public class PlaceObject : MonoBehaviour
         if (isTouching && touchStartTime != 0f && spawnedArrival!=null)
         {
             barreProgression.SetValue(Mathf.Clamp(Time.time - touchStartTime, 0f, 3f) / 3f);
-            debug.text = (Mathf.Clamp(Time.time - touchStartTime, 0f, 3f) / 3f).ToString();
         }
     }
 

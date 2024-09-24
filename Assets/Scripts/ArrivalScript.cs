@@ -16,8 +16,6 @@ public class ArrivalScript : MonoBehaviour
 
     void Start()
     {
-        // Make sure the particle system is not playing initially.
-        GetComponent<ParticleSystem>().Stop();
     }
 
 
