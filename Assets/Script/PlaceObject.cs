@@ -4,12 +4,22 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.UI;
+using System.Reflection;
 
 
 
 [RequireComponent(typeof(ARRaycastManager), typeof(ARPlaneManager))]
 public class PlaceObject : MonoBehaviour
 {
+    [SerializeField]
+    private Toggle toggle;
+
+    [SerializeField]
+    private BarreProgression barreProgression;
+
+    [SerializeField]
+    private Text debug;
 
     [SerializeField]
     private GameObject ballToSpawn;
@@ -25,13 +35,17 @@ public class PlaceObject : MonoBehaviour
     private GameObject spawnedBall;
     private GameObject spawnedArrival;
 
-    private float touchStartTime;
+    private float touchStartTime=0f;
     private bool isTouching = false;
+
+    //private BarreProgression barreProgression;
 
     private void Awake()
     {
         raycastManager = FindObjectOfType<ARRaycastManager>();
         planeManager = FindObjectOfType<ARPlaneManager>();
+        //barreProgression = FindObjectOfType<BarreProgression>();
+        
     }
 
     private void OnEnable()
@@ -50,13 +64,28 @@ public class PlaceObject : MonoBehaviour
         EnhancedTouch.Touch.onFingerUp -= OnFingerUp;
     }
 
+    private void Update()
+    {
+        if (isTouching && touchStartTime != 0f && spawnedArrival!=null)
+        {
+            barreProgression.SetValue(Mathf.Clamp(Time.time - touchStartTime, 0f, 3f) / 3f);
+            debug.text = (Mathf.Clamp(Time.time - touchStartTime, 0f, 3f) / 3f).ToString();
+        }
+    }
+
     private void OnFingerDown(Finger finger)
     {
+        
+
         if (finger.index != 0 || isTouching)
+        {
+            
             return;
+        }
 
         touchStartTime = Time.time;  // Capture le temps au d�but du toucher
         isTouching = true;
+        //barreProgression.SetValue(Mathf.Clamp(Time.time - touchStartTime, 0f, 3f) / 3f);
     }
 
     private void OnFingerUp(EnhancedTouch.Finger finger)
@@ -79,7 +108,10 @@ public class PlaceObject : MonoBehaviour
                 var hitPose = hits[0].pose;
                 Vector3 addedPosition = new Vector3(0, 0.1f, 0);
                 spawnedArrival = Instantiate(arrivalPrefab, hitPose.position + addedPosition, hitPose.rotation);
+                //toggle.isOn = true;
             }
+            //toggle.enabled = true;
+            
         }
         else
         {
@@ -94,8 +126,16 @@ public class PlaceObject : MonoBehaviour
 
             rigidbody.AddForce(camera.transform.forward * forceMultiplier, ForceMode.Impulse); // Apply force with adjusted strength
         }
-
+        touchStartTime = 0f;
+        barreProgression.SetValue(0f);
         isTouching = false; // Reset touching flag
+    }
+
+    public void replaceArrival()
+    {
+        //spawnedArrival.gameObject.
+        GameObject.Destroy(spawnedArrival);
+        //spawnedArrival = null; 
     }
 
 }
