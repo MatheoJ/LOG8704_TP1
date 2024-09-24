@@ -3,31 +3,30 @@ using System.Collections;
 
 public class BallThrower : MonoBehaviour
 {
-    public GameObject ballPrefab; // Reference to the ball prefab
+    public GameObject ballPrefab;
     public float throwForce = 10f; // Speed of the thrown ball   
     public float throwInterval = 2f; // Time interval between throws.  /!\ throwInterval > PortalCooldown or teleportation won't work properly /!\
 
     private void Start()
     {
-        // Start the ball throwing coroutine
         StartCoroutine(ThrowBalls());
     }
 
     private IEnumerator ThrowBalls()
     {
         Debug.Log("In ThrowBalls()");
-        while (true) // keep throwing balls
+        while (true)
         {
             ThrowBall(); 
 
-            // Wait for the specified interval before throwing again
+            // Waits before throwing again
             yield return new WaitForSeconds(throwInterval);
         }
     }
 
     private void ThrowBall()
     {
-        // Create the ball at the position of this object
+        // Create the ball at the position of the current object
         GameObject ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
 
         // Get the Rigidbody component and apply force in the specified direction
