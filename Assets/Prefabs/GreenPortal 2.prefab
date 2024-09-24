@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 6083639521587571887}
   m_Layer: 0
   m_Name: GreenPortal 2
-  m_TagString: Untagged
+  m_TagString: GreenPortal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,8 +165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff1da5d268c8bf47b2d0993519cef31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exitPortal: {fileID: 5752179291755843496, guid: f642400c98516614b95d5184356bdcdd,
-    type: 3}
   spawnPosition: {fileID: 169478518746444816}
   portalCooldown: 0.5
 --- !u!65 &6083639521587571887

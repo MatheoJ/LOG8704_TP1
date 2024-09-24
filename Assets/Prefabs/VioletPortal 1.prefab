@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 2141891385831437570}
   m_Layer: 0
   m_Name: VioletPortal 1
-  m_TagString: Untagged
+  m_TagString: VioletPortal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,8 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff1da5d268c8bf47b2d0993519cef31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exitPortal: {fileID: 1200387107013972964, guid: 368c952d699ab0740a76bdc903998a44,
-    type: 3}
   spawnPosition: {fileID: 6739805870903076496}
   portalCooldown: 0.5
 --- !u!65 &2141891385831437570
