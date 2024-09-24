@@ -159,6 +159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea00ab06c173974d9ec8ebb242ce0cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggle: {fileID: 0}
+  barreProgression: {fileID: 2097779532}
+  debug: {fileID: 0}
   ballToSpawn: {fileID: 6306418840398675862, guid: ebdb1fb6e3a26ef4691b7218f2a129e0,
     type: 3}
   arrivalPrefab: {fileID: 6436623359186339547, guid: 15e35a406a0122e47a50d0f8806eb0b4,
@@ -514,26 +517,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 640934518148362961, guid: 8a581a25b9bc85c4bbe8e8b475c52d4b,
+    - target: {fileID: 3154189929799752331, guid: 8a581a25b9bc85c4bbe8e8b475c52d4b,
         type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 640934518148362961, guid: 8a581a25b9bc85c4bbe8e8b475c52d4b,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 640934518148362961, guid: 8a581a25b9bc85c4bbe8e8b475c52d4b,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 640934518148362961, guid: 8a581a25b9bc85c4bbe8e8b475c52d4b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 243.45
-      objectReference: {fileID: 0}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 188148739}
     - target: {fileID: 4275905447921057463, guid: 8a581a25b9bc85c4bbe8e8b475c52d4b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -633,16 +621,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470414185176620936, guid: 8a581a25b9bc85c4bbe8e8b475c52d4b,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470414185176620936, guid: 8a581a25b9bc85c4bbe8e8b475c52d4b,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7352423181179598698, guid: 8a581a25b9bc85c4bbe8e8b475c52d4b,
         type: 3}
@@ -748,6 +726,18 @@ MonoBehaviour:
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
   m_CancelButton: Cancel
+--- !u!114 &2097779532 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6029227908274226738, guid: 8a581a25b9bc85c4bbe8e8b475c52d4b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1287456899}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a25ea0c64546704d9c98939b98e05b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
