@@ -10,5 +10,6 @@ We only tested on Android:
 - Xiaomi poco f3
 
 ## Target Image
-
-Image for image recognition
+Image for image recognition can be found in:
+Assets/Materials/
+They are named: "one", "two", "three", "four"
