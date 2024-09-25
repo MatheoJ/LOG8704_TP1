@@ -8,8 +8,6 @@ public class PortalBehavior : MonoBehaviour
     private bool isTeleporting = false; // Prevent teleport loop
     public float portalCooldown = 0.5f; //
     
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (spawnPosition == null)
@@ -31,6 +29,7 @@ public class PortalBehavior : MonoBehaviour
                 if (obj != gameObject)
                 {
                     exitPortal = obj;
+                    break;
                 }
             }
             if (exitPortal != null)
@@ -66,16 +65,7 @@ public class PortalBehavior : MonoBehaviour
         TrailRenderer trail = other.GetComponentInChildren<TrailRenderer>();
         trail.Clear(); // Clear the trail to avoid a trail between the two portals
 
-
-        Debug.Log("Object " + other.name + " teleported from " + name + " to " + exitPortal.name);
-        Debug.Log("AFTER teleportation : Object " + other.name + " at position : " + other.transform.position);
-        Debug.Log("Entry portal postition : " + transform.position);
-        Debug.Log("Exit portal postition : " + exitPortal.transform.position);
-        Debug.Log("------------------");
-
         yield return new WaitForSeconds(portalCooldown); // Small delay to prevent immediate re-teleportation (the other way around) -> temporarily stops the coroutine
-
-
 
         // Enabling the two portals teleporting ability
         isTeleporting = false; 

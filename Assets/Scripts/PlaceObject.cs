@@ -13,13 +13,7 @@ using System.Reflection;
 public class PlaceObject : MonoBehaviour
 {
     [SerializeField]
-    private Toggle toggle;
-
-    [SerializeField]
     private BarreProgression barreProgression;
-
-    [SerializeField]
-    private Text debug;
 
     [SerializeField]
     private GameObject ballToSpawn;
@@ -28,7 +22,6 @@ public class PlaceObject : MonoBehaviour
     private GameObject arrivalPrefab;
 
     private ARRaycastManager raycastManager;
-    private ARPlaneManager planeManager;
 
     private static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
@@ -38,14 +31,9 @@ public class PlaceObject : MonoBehaviour
     private float touchStartTime=0f;
     private bool isTouching = false;
 
-    //private BarreProgression barreProgression;
-
     private void Awake()
     {
         raycastManager = FindObjectOfType<ARRaycastManager>();
-        planeManager = FindObjectOfType<ARPlaneManager>();
-        //barreProgression = FindObjectOfType<BarreProgression>();
-        
     }
 
     private void OnEnable()
@@ -74,8 +62,6 @@ public class PlaceObject : MonoBehaviour
 
     private void OnFingerDown(Finger finger)
     {
-        
-
         if (finger.index != 0 || isTouching)
         {
             
@@ -84,7 +70,6 @@ public class PlaceObject : MonoBehaviour
 
         touchStartTime = Time.time;  // Capture le temps au d�but du toucher
         isTouching = true;
-        //barreProgression.SetValue(Mathf.Clamp(Time.time - touchStartTime, 0f, 3f) / 3f);
     }
 
     private void OnFingerUp(EnhancedTouch.Finger finger)
@@ -107,10 +92,7 @@ public class PlaceObject : MonoBehaviour
                 var hitPose = hits[0].pose;
                 Vector3 addedPosition = new Vector3(0, 0.1f, 0);
                 spawnedArrival = Instantiate(arrivalPrefab, hitPose.position + addedPosition, hitPose.rotation);
-                //toggle.isOn = true;
             }
-            //toggle.enabled = true;
-            
         }
         else
         {
@@ -121,7 +103,7 @@ public class PlaceObject : MonoBehaviour
             spawnedBall = Instantiate(ballToSpawn, camera.transform.position, camera.transform.rotation);
             var rigidbody = spawnedBall.GetComponent<Rigidbody>();
 
-            float forceMultiplier = Mathf.Lerp(0.5f, 8.0f, touchDuration / 3.0f); // Adjust force based on touch duration
+            float forceMultiplier = Mathf.Lerp(0.5f, 4.0f, touchDuration / 3.0f); // Adjust force based on touch duration
 
             rigidbody.AddForce(camera.transform.forward * forceMultiplier, ForceMode.Impulse); // Apply force with adjusted strength
         }

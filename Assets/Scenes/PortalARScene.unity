@@ -136,8 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15f82cc229284894964d2d30806969d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HumanSegmentationStencilMode: 0
-  m_HumanSegmentationDepthMode: 0
+  m_HumanSegmentationStencilMode: 1
+  m_HumanSegmentationDepthMode: 1
   m_EnvironmentDepthMode: 2
   m_EnvironmentDepthTemporalSmoothing: 1
   m_OcclusionPreferenceMode: 0
@@ -159,9 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea00ab06c173974d9ec8ebb242ce0cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toggle: {fileID: 0}
   barreProgression: {fileID: 2097779532}
-  debug: {fileID: 0}
   ballToSpawn: {fileID: 6306418840398675862, guid: ebdb1fb6e3a26ef4691b7218f2a129e0,
     type: 3}
   arrivalPrefab: {fileID: 6436623359186339547, guid: 15e35a406a0122e47a50d0f8806eb0b4,

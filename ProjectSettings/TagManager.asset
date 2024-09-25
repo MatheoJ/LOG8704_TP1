@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Arrival
   - Teleportable
+  - GreenPortal
+  - VioletPortal
   layers:
   - Default
   - TransparentFX
